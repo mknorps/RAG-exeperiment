@@ -1,0 +1,15 @@
+git bash
+
+git checkout main
+git pull
+git status
+git checkout -b test_branch
+git config --list
+git remote add origin git@github.com:mknorps/RAG-exeperiment.git (dodaje remote origin url do konfiguracji)
+git clone git@github.com:mknorps/RAG-exeperiment.git
+
+pip install poetry
+poerty shell
+poetry install
+poerty install --no-root
+jupyter-notebook
