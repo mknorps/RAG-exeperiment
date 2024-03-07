@@ -2,7 +2,7 @@
 name = "rag-experiment"
 version = "0.1.0"
 description = ""
-authors = ["Maria Knorps <maria.knorps@tweag.io>", "Aleksander Kazecki <olekkazecki@mat.umk.pl>","Marcin Zadrożny" <mzadrozny@mat.umk.pl>"]
+authors = ["Maria Knorps <maria.knorps@tweag.io>", "Aleksander Kazecki <olekkazecki@mat.umk.pl>","Marcin Zadrożny <mzadrozny@mat.umk.pl>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
