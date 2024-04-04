@@ -26,13 +26,16 @@ def open_db(
     )
 
 
-
+# TODO Embed plain text documents into vectors
+# Use documents as input with metadata allowing 
+# to identify the article the document is created from and the file it originates from
+# https://api.python.langchain.com/en/latest/documents/langchain_core.documents.base.Document.html#langchain_core.documents.base.Document
 def populate_db(name: str):
     db = open_db(
         name=name,
     )
     docs = ... # documents in plain text converted from LaTex
-    splitter = ... # Documents splitter
+    splitter = ... # Documents splitter from langchain library
     print(f"Indexing {len(docs)} documents")
     for doc in tqdm(docs):
         splitted_docs = splitter.split_documents([doc])
