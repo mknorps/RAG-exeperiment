@@ -40,3 +40,6 @@ def populate_db(name: str):
     for doc in tqdm(docs):
         splitted_docs = splitter.split_documents([doc])
         db.add_documents(splitted_docs)
+
+
+# TODO function to search for documents in the database
