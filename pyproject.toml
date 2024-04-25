@@ -2,7 +2,7 @@
 name = "rag-experiment"
 version = "0.1.0"
 description = ""
-authors = ["Maria Knorps <maria.knorps@tweag.io>", "Aleksander Kazecki <olekkazecki@mat.umk.pl>", "Bartosz Pragacz <296704@stud.umk.pl>", "Marcin Zadrożny <mzadrozny@mat.umk.pl>"]
+authors = ["Maria Knorps <maria.knorps@tweag.io>", "Aleksander Kazecki <olekkazecki@mat.umk.pl>", "Bartosz Pragacz <296704@stud.umk.pl>", "Marcin Zadrożny <mzadrozny@mat.umk.pl>", "Mateusz Szymański <szymans12@mat.umk.pl>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -12,6 +12,9 @@ langchain = "^0.1.9"
 gpt4all = "^2.2.1.post1"
 tqdm = "^4.66.2"
 chromadb = "^0.4.24"
+arxiv = "^2.1.0"
+pydetex = "^1.0.8"
+langchain-text-splitters = "^0.0.1"
 
 
 [build-system]
