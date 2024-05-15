@@ -1,4 +1,9 @@
 models
 *.ipynb_checkpoints/
 *__pycache__/
+.idea/
 Info
+.venv/
+.vs/
+models/
+rag_experiment/papers_example/*
