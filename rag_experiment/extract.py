@@ -1,4 +1,5 @@
 # Extract data from Arxiv papers and store them on a disc
+from typing import Any, Dict
 import arxiv
 import tarfile
 import tempfile
@@ -84,7 +85,7 @@ def unpack_archives(source_dir: str, target_dir: str, metadata_dict: dict):
                 
 
 # Extract .tex files to a folder in one function.
-def extract_tex_files(query: str, target_dir: str, max_results: int = 10):
+def extract_tex_files(query: str, target_dir: str, max_results: int = 10) -> Dict[str, Any]:
     
     # Create a temporary directory to store download archives
     temp_dir = tempfile.mkdtemp()
@@ -110,6 +111,9 @@ def extract_tex_files(query: str, target_dir: str, max_results: int = 10):
         shutil.rmtree(temp_dir)
 
     print(f'All .tex files have been downloaded and extracted to a directory "{target_dir}"')
+
+    return metadata_dict
+
 
 
 # Example usage:
