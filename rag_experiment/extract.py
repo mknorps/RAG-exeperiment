@@ -57,7 +57,8 @@ def unpack_archives(source_dir: str, target_dir: str, metadata_dict: dict):
     for file_name in os.listdir(source_dir):
         if file_name.endswith('.tar.gz'):
             # Create a unique subdirectory for each archive
-            subdirectory_path = os.path.join(target_dir, os.path.splitext(file_name)[0])
+            # We use the first 100 characters of the sanitized title to avoid long file paths
+            subdirectory_path = os.path.join(target_dir, os.path.splitext(file_name)[0][:100])
             os.makedirs(subdirectory_path, exist_ok=True)  # Ensure the subdirectory exists
             
             # Extract entry_id from the file name (the format is entry_id.sanitized _title.tar.gz)
