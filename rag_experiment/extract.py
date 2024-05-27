@@ -1,5 +1,5 @@
 # Extract data from Arxiv papers and store them on a disc
-from typing import Any, Dict
+from typing import Any, Dict, List, Optional
 import arxiv
 import tarfile
 import tempfile
@@ -12,14 +12,18 @@ import json
 client = arxiv.Client()
 
 # Function that takes query as an argument for arxiv search and returns the results
-def search_arxiv(query: str, max_results: int = 10) -> arxiv.Search:
-    search = arxiv.Search(
-        query=query,
-        max_results=max_results,
-        sort_by=arxiv.SortCriterion.SubmittedDate
-    )
-    return client.results(search)
+def search_arxiv(query: Optional[str] = None, max_results: int = 10, arxiv_ids: Optional[List[str]] = None) -> arxiv.Search:
+    if query is None and arxiv_ids is None:
+        raise ValueError("Either a query or a list of arXiv IDs must be provided.")
+        return
 
+    if arxiv_ids is not None:
+        search = arxiv.Search(id_list=arxiv_ids)
+    elif query is not None:
+        search = arxiv.Search(query=query, max_results=max_results,sort_by=arxiv.SortCriterion.SubmittedDate)
+    return client.results(search)
+    
+    
 
 # Download results to a separate folder. Create function that takes results and name of the folder as an input.
 # This should be a temporary folder. 
@@ -85,14 +89,20 @@ def unpack_archives(source_dir: str, target_dir: str, metadata_dict: dict):
                 
 
 # Extract .tex files to a folder in one function.
-def extract_tex_files(query: str, target_dir: str, max_results: int = 10) -> Dict[str, Any]:
+def extract_tex_files(query: Optional[str] = None, target_dir: str = "default_extract_dir", max_results: int = 10, arxiv_ids: List[str] = None) -> Dict[str, Any]:
+    if query is None and arxiv_ids is None:
+        raise ValueError("Either a query or a list of arXiv IDs must be provided.")
+        return
     
     # Create a temporary directory to store download archives
     temp_dir = tempfile.mkdtemp()
 
     try:
-        # Search arXiv for the query
-        results = list(search_arxiv(query, max_results))
+        if arxiv_ids is None:
+            # Search arXiv for the query
+            results = list(search_arxiv(query=query, max_results=max_results))
+        else:
+            results = list(search_arxiv(arxiv_ids = arxiv_ids))
         
         # Download the papers' source files to the temporary directory
         download_results(results, temp_dir)
@@ -113,6 +123,7 @@ def extract_tex_files(query: str, target_dir: str, max_results: int = 10) -> Dic
     print(f'All .tex files have been downloaded and extracted to a directory "{target_dir}"')
 
     return metadata_dict
+
 
 
 
