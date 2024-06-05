@@ -44,7 +44,18 @@ def populate_and_prepare_db(name: str, docs: list):
 
 
 # Function to search for documents in the database
-def search_for_documents(query: str, db_name: str):
+def search_for_documents(query: str, db_name: str, k: int):
     db = open_db(name=db_name)
-    results = db.similarity_search(query)
-    return results
+    results = db.similarity_search(query, k=k)
+
+    unique_results = []
+    seen_contents = set()
+
+    # We remove duplicates
+    for result in results:
+        content = result.page_content
+        if content not in seen_contents:
+            unique_results.append(result)
+            seen_contents.add(content)
+
+    return unique_results
